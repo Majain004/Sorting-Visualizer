@@ -1,0 +1,18 @@
+# Sorting Visualizer Dependencies
+# No external dependencies - uses Python standard library only
+
+# Standard Library Modules Used:
+# - tkinter: GUI framework
+# - collections: namedtuple for step tracking
+# - typing: Type hints
+# - random: Random array generation
+# - time: Performance measurement
+
+# Installation:
+# pip install -r requirements.txt
+# (Note: tkinter comes with Python by default on most systems)
+
+# For tkinter installation on specific systems:
+# Ubuntu/Debian: sudo apt-get install python3-tk
+# Fedora: sudo dnf install python3-tkinter
+# macOS: tkinter included with Python from python.org
