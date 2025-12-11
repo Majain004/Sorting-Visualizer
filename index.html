@@ -7,9 +7,9 @@
   <meta name="author" content="Your Name" />
   <title>Sorting Algorithm Visualizer | Interactive Educational Tool</title>
 
-  <!-- PyScript CDN -->
-  <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
-  <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+  <!-- PyScript CDN - Using stable release -->
+  <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css">
+  <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
 
   <style>
     * {
@@ -266,25 +266,28 @@
     </footer>
   </div>
 
-  <py-script>
+  <script type="py" src="pyscript.toml" config>
+    packages = []
+  </script>
+
+  <script type="py">
+from pyscript import document, window
 import random
 import asyncio
-from js import document
 
-container = document.getElementById("container")
-size_input = document.getElementById("size")
-speed_input = document.getElementById("speed")
-algo_select = document.getElementById("algo")
-gen_btn = document.getElementById("gen")
-start_btn = document.getElementById("start")
-shuffle_btn = document.getElementById("shuffle")
+container = document.querySelector("#container")
+size_input = document.querySelector("#size")
+speed_input = document.querySelector("#speed")
+algo_select = document.querySelector("#algo")
+gen_btn = document.querySelector("#gen")
+start_btn = document.querySelector("#start")
+shuffle_btn = document.querySelector("#shuffle")
 
 arr = []
 
 def render_array():
     # clear container
-    while container.firstChild:
-        container.removeChild(container.firstChild)
+    container.innerHTML = ""
     max_val = max(arr) if arr else 1
     for v in arr:
         bar = document.createElement("div")
@@ -302,14 +305,14 @@ def gen_array(n):
     render_array()
 
 async def highlight(i, j, color):
-    bars = container.getElementsByClassName("bar")
+    bars = document.querySelectorAll(".bar")
     bars[i].style.background = color
     bars[j].style.background = color
 
 async def swap(i, j):
     # swap values in arr and update heights
     arr[i], arr[j] = arr[j], arr[i]
-    bars = container.getElementsByClassName("bar")
+    bars = document.querySelectorAll(".bar")
     # animate by swapping heights/text
     h_i = bars[i].style.height
     h_j = bars[j].style.height
@@ -325,15 +328,14 @@ async def bubble_sort():
     for x in range(n):
         swapped = False
         for y in range(0, n-x-1):
-            await highlight(y, y+1, "#ef4444")  # red compare
+            await highlight(y, y+1, "#ef4444")
             await asyncio.sleep(int(speed_input.value) / 1000)
             if arr[y] > arr[y+1]:
-                await highlight(y, y+1, "#10b981")  # green swap
+                await highlight(y, y+1, "#10b981")
                 await asyncio.sleep(int(speed_input.value) / 1000)
                 await swap(y, y+1)
                 swapped = True
-            # revert color
-            bars = container.getElementsByClassName("bar")
+            bars = document.querySelectorAll(".bar")
             bars[y].style.background = "#3b82f6"
             bars[y+1].style.background = "#3b82f6"
         if not swapped:
@@ -347,16 +349,13 @@ async def insertion_sort():
             await highlight(j, j+1, "#ef4444")
             await asyncio.sleep(int(speed_input.value) / 1000)
             arr[j+1] = arr[j]
-            # update visual
-            bars = container.getElementsByClassName("bar")
+            bars = document.querySelectorAll(".bar")
             bars[j+1].style.height = bars[j].style.height
             bars[j+1].innerText = bars[j].innerText
             bars[j].style.background = "#3b82f6"
             j -= 1
         arr[j+1] = key
-        # set the final bar value visually
-        bars = container.getElementsByClassName("bar")
-        # find height by value relative to max
+        bars = document.querySelectorAll(".bar")
         max_val = max(arr)
         bars[j+1].style.height = f"{int((arr[j+1]/max_val)*100)}%"
         bars[j+1].innerText = str(arr[j+1])
@@ -370,24 +369,21 @@ async def selection_sort():
             await highlight(min_idx, j, "#ef4444")
             await asyncio.sleep(int(speed_input.value) / 1000)
             if arr[j] < arr[min_idx]:
-                # revert previous min color
-                bars = container.getElementsByClassName("bar")
+                bars = document.querySelectorAll(".bar")
                 bars[min_idx].style.background = "#3b82f6"
                 min_idx = j
                 bars[min_idx].style.background = "#f59e0b"
             else:
-                bars = container.getElementsByClassName("bar")
+                bars = document.querySelectorAll(".bar")
                 bars[j].style.background = "#3b82f6"
         if min_idx != i:
             await highlight(i, min_idx, "#10b981")
             await asyncio.sleep(int(speed_input.value) / 1000)
             await swap(i, min_idx)
-        # set sorted bar color
-        bars = container.getElementsByClassName("bar")
+        bars = document.querySelectorAll(".bar")
         bars[i].style.background = "#6366f1"
         await asyncio.sleep(int(speed_input.value) / 1000)
 
-# Event bindings
 def on_generate(ev=None):
     try:
         n = int(size_input.value)
@@ -410,8 +406,7 @@ async def on_start(ev=None):
         await insertion_sort()
     elif algo == "selection":
         await selection_sort()
-    # mark all sorted
-    bars = container.getElementsByClassName("bar")
+    bars = document.querySelectorAll(".bar")
     for b in bars:
         b.style.background = "#059669"
     start_btn.disabled = False
@@ -420,10 +415,14 @@ async def on_start(ev=None):
 
 gen_btn.addEventListener("click", on_generate)
 shuffle_btn.addEventListener("click", on_shuffle)
-start_btn.addEventListener("click", lambda e: asyncio.ensure_future(on_start()))
+
+def start_sorting(event):
+    asyncio.create_task(on_start(event))
+
+start_btn.addEventListener("click", start_sorting)
 
 # initial
 gen_array(int(size_input.value))
-  </py-script>
+  </script>
 </body>
 </html>
