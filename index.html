@@ -3,344 +3,295 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Professional Sorting Algorithm Visualizer - Desktop application built with Python and Tkinter">
-    <title>Sorting Algorithm Visualizer | Portfolio Project</title>
+    <title>Sorting Algorithm Visualizer</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 900px;
-            background: white;
-            border-radius: 20px;
-            padding: 50px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-        }
-        
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        
-        h1 {
-            font-size: 2.5rem;
-            color: #1e293b;
-            margin-bottom: 10px;
-        }
-        
-        .subtitle {
-            font-size: 1.2rem;
-            color: #64748b;
-            margin-bottom: 20px;
-        }
-        
-        .badge {
-            display: inline-block;
-            padding: 6px 12px;
-            background: #10b981;
-            color: white;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            margin: 0 5px;
-        }
-        
-        .section {
-            margin: 30px 0;
-        }
-        
-        h2 {
-            color: #1e293b;
-            margin-bottom: 15px;
-            font-size: 1.5rem;
-            border-bottom: 3px solid #667eea;
-            padding-bottom: 10px;
-        }
-        
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin: 20px 0;
-        }
-        
-        .feature-card {
-            padding: 20px;
-            background: #f8fafc;
-            border-radius: 10px;
-            border-left: 4px solid #667eea;
-        }
-        
-        .feature-card h3 {
-            color: #1e40af;
-            margin-bottom: 8px;
-        }
-        
-        .feature-card p {
-            color: #475569;
-            line-height: 1.6;
-        }
-        
-        .algorithms {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin: 15px 0;
-        }
-        
-        .algo-tag {
-            padding: 8px 16px;
-            background: #eff6ff;
-            border: 2px solid #3b82f6;
-            border-radius: 8px;
-            color: #1e40af;
-            font-weight: 600;
-        }
-        
-        .buttons {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            margin: 30px 0;
-            flex-wrap: wrap;
-        }
-        
-        .btn {
-            padding: 15px 30px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
-        
-        .btn-primary {
-            background: #24292e;
-            color: white;
-        }
-        
-        .btn-secondary {
-            background: #10b981;
-            color: white;
-        }
-        
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 20px;
-            margin: 20px 0;
-        }
-        
-        .stat-box {
-            text-align: center;
-            padding: 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 10px;
-            color: white;
-        }
-        
-        .stat-number {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 5px;
-        }
-        
-        .stat-label {
-            font-size: 0.9rem;
-            opacity: 0.9;
-        }
-        
-        .code-block {
-            background: #1e293b;
-            color: #10b981;
-            padding: 20px;
-            border-radius: 10px;
-            font-family: 'Courier New', monospace;
-            overflow-x: auto;
-            margin: 15px 0;
-        }
-        
-        .tech-stack {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin: 15px 0;
-        }
-        
-        .tech-badge {
-            padding: 6px 12px;
-            background: #f59e0b;
-            color: white;
-            border-radius: 6px;
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-        
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 2px solid #e5e7eb;
-            color: #64748b;
-        }
-        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; background: #f0f0f0; padding: 20px; }
+        .container { max-width: 1200px; margin: 0 auto; background: white; border-radius: 10px; padding: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { text-align: center; color: #333; margin-bottom: 20px; }
+        .controls { display: flex; flex-wrap: wrap; gap: 15px; align-items: center; padding: 15px; background: #f8f9fa; border-radius: 8px; margin-bottom: 20px; }
+        .control-group { display: flex; align-items: center; gap: 8px; }
+        label { font-weight: 600; color: #555; }
+        select, input[type="number"] { padding: 8px 12px; border: 2px solid #ddd; border-radius: 5px; font-size: 14px; }
+        input[type="range"] { width: 150px; }
+        button { padding: 10px 20px; border: none; border-radius: 5px; font-weight: 600; cursor: pointer; transition: all 0.3s; font-size: 14px; }
+        button:hover { transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
+        button:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn-generate { background: #3b82f6; color: white; }
+        .btn-start { background: #10b981; color: white; }
+        .btn-pause { background: #f59e0b; color: white; }
+        .btn-reset { background: #ef4444; color: white; }
+        .custom-input { width: 100%; padding: 15px; background: #f8f9fa; border-radius: 8px; margin-bottom: 20px; }
+        .custom-input input[type="text"] { width: calc(100% - 200px); padding: 8px 12px; border: 2px solid #ddd; border-radius: 5px; margin-right: 10px; }
+        .status-message { display: inline-block; margin-left: 10px; font-size: 12px; font-weight: 600; }
+        .status-success { color: #10b981; }
+        .status-error { color: #ef4444; }
+        .canvas-container { background: white; border: 2px solid #e5e7eb; border-radius: 8px; padding: 15px; margin-bottom: 20px; height: 400px; position: relative; }
+        #canvas { width: 100%; height: 100%; }
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; padding: 15px; background: #f8f9fa; border-radius: 8px; }
+        .stat-box { text-align: center; padding: 15px; background: white; border-radius: 8px; border-left: 4px solid; }
+        .stat-box.comparisons { border-color: #3b82f6; }
+        .stat-box.swaps { border-color: #10b981; }
+        .stat-box.writes { border-color: #f59e0b; }
+        .stat-box.steps { border-color: #8b5cf6; }
+        .stat-box.time { border-color: #ef4444; }
+        .stat-label { font-size: 12px; color: #64748b; font-weight: 600; margin-bottom: 5px; }
+        .stat-value { font-size: 24px; font-weight: 700; color: #1e293b; }
+        .info-label { text-align: center; padding: 10px; color: #64748b; font-size: 14px; min-height: 30px; }
         @media (max-width: 768px) {
-            .container {
-                padding: 30px 20px;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .buttons {
-                flex-direction: column;
-            }
-            
-            .btn {
-                width: 100%;
-                justify-content: center;
-            }
+            .controls { flex-direction: column; align-items: stretch; }
+            .control-group { width: 100%; }
+            button { width: 100%; }
+            .custom-input input[type="text"] { width: 100%; margin-bottom: 10px; }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1>🎯 Sorting Algorithm Visualizer</h1>
-            <p class="subtitle">Professional Desktop Application for Algorithm Education</p>
-            <div>
-                <span class="badge">Python</span>
-                <span class="badge">Tkinter</span>
-                <span class="badge">Open Source</span>
+        <h1>🎯 Sorting Algorithm Visualizer</h1>
+        <div class="controls">
+            <div class="control-group">
+                <label>Algorithm:</label>
+                <select id="algorithm">
+                    <option value="bubble">Bubble Sort</option>
+                    <option value="selection">Selection Sort</option>
+                    <option value="insertion">Insertion Sort</option>
+                    <option value="merge">Merge Sort</option>
+                    <option value="quick">Quick Sort</option>
+                </select>
             </div>
-        </div>
-
-        <div class="section">
-            <h2>📊 Project Overview</h2>
-            <p style="color: #475569; line-height: 1.8; margin: 15px 0;">
-                A sophisticated desktop application that provides real-time visualization of sorting algorithms 
-                with comprehensive statistics tracking. Built with Python and Tkinter, featuring a modern GUI 
-                and professional-grade code architecture.
-            </p>
-        </div>
-
-        <div class="section">
-            <h2>⚡ Key Features</h2>
-            <div class="features">
-                <div class="feature-card">
-                    <h3>🎨 Real-Time Visualization</h3>
-                    <p>Watch algorithms work with color-coded operations and smooth animations</p>
-                </div>
-                <div class="feature-card">
-                    <h3>📈 Live Statistics</h3>
-                    <p>Track comparisons, swaps, writes, steps, and execution time</p>
-                </div>
-                <div class="feature-card">
-                    <h3>🔧 Customizable</h3>
-                    <p>Adjust array size (10-99), speed (1-200ms), and load custom arrays</p>
-                </div>
-                <div class="feature-card">
-                    <h3>📱 Responsive Design</h3>
-                    <p>Window resizing support with adaptive visualization</p>
-                </div>
+            <div class="control-group">
+                <label>Array Size:</label>
+                <input type="number" id="arraySize" min="10" max="99" value="50">
             </div>
-        </div>
-
-        <div class="section">
-            <h2>🔬 Algorithms Implemented</h2>
-            <div class="algorithms">
-                <div class="algo-tag">Bubble Sort</div>
-                <div class="algo-tag">Selection Sort</div>
-                <div class="algo-tag">Insertion Sort</div>
-                <div class="algo-tag">Merge Sort</div>
-                <div class="algo-tag">Quick Sort</div>
+            <div class="control-group">
+                <label>Speed (ms):</label>
+                <input type="range" id="speed" min="1" max="200" value="30">
+                <span id="speedValue">30</span>
             </div>
+            <button class="btn-generate" onclick="generateArray()">🔄 Generate</button>
+            <button class="btn-start" id="startBtn" onclick="startSort()">▶️ Start</button>
+            <button class="btn-pause" id="pauseBtn" onclick="pauseSort()">⏸️ Pause</button>
+            <button class="btn-reset" onclick="resetArray()">🔄 Reset</button>
         </div>
-
-        <div class="section">
-            <h2>💻 Technology Stack</h2>
-            <div class="tech-stack">
-                <span class="tech-badge">Python 3.6+</span>
-                <span class="tech-badge">Tkinter GUI</span>
-                <span class="tech-badge">Type Hints</span>
-                <span class="tech-badge">Generator Functions</span>
-                <span class="tech-badge">OOP Design</span>
-            </div>
+        <div class="custom-input">
+            <label style="display: block; margin-bottom: 8px;">Custom Array (comma or space separated, 1-400, max 1000 numbers):</label>
+            <input type="text" id="customArray" placeholder="e.g., 64, 34, 25, 12, 22, 11, 90">
+            <button class="btn-generate" onclick="loadCustomArray()">Load Custom Array</button>
+            <span id="customStatus" class="status-message"></span>
         </div>
-
-        <div class="section">
-            <h2>📦 Installation & Usage</h2>
-            <div class="code-block">
-# Clone the repository<br>
-git clone https://github.com/Majain004/Sorting-Visualizer.git<br>
-<br>
-# Navigate to directory<br>
-cd Sorting-Visualizer<br>
-<br>
-# Run the visualizer<br>
-python visualizer.py
-            </div>
+        <div class="canvas-container">
+            <canvas id="canvas"></canvas>
         </div>
-
-        <div class="section">
-            <h2>📊 Project Statistics</h2>
-            <div class="stats">
-                <div class="stat-box">
-                    <div class="stat-number">5</div>
-                    <div class="stat-label">Algorithms</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-number">37/37</div>
-                    <div class="stat-label">Tests Passing</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-number">1000+</div>
-                    <div class="stat-label">Lines of Code</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-number">100%</div>
-                    <div class="stat-label">Type Hints</div>
-                </div>
-            </div>
+        <div class="info-label" id="infoLabel"></div>
+        <div class="stats">
+            <div class="stat-box comparisons"><div class="stat-label">Comparisons</div><div class="stat-value" id="comparisons">0</div></div>
+            <div class="stat-box swaps"><div class="stat-label">Swaps</div><div class="stat-value" id="swaps">0</div></div>
+            <div class="stat-box writes"><div class="stat-label">Writes</div><div class="stat-value" id="writes">0</div></div>
+            <div class="stat-box steps"><div class="stat-label">Total Steps</div><div class="stat-value" id="steps">0</div></div>
+            <div class="stat-box time"><div class="stat-label">Time</div><div class="stat-value" id="time">0.00s</div></div>
         </div>
-
-        <div class="buttons">
-            <a href="https://github.com/Majain004/Sorting-Visualizer" class="btn btn-primary" target="_blank">
-                📁 View on GitHub
-            </a>
-            <a href="https://github.com/Majain004/Sorting-Visualizer/archive/refs/heads/main.zip" class="btn btn-secondary" target="_blank">
-                ⬇️ Download Project
-            </a>
-        </div>
-
-        <footer>
-            <p><strong>Created by:</strong> Portfolio Project for Resume</p>
-            <p style="margin-top: 10px;">Demonstrates: Data Structures & Algorithms • GUI Development • Software Engineering Best Practices</p>
-        </footer>
     </div>
+    <script>
+        let array = [], originalArray = [], canvas, ctx, running = false, paused = false;
+        let comparisons = 0, swaps = 0, writes = 0, steps = 0, startTime = 0;
+
+        window.onload = function() {
+            canvas = document.getElementById('canvas');
+            ctx = canvas.getContext('2d');
+            resizeCanvas();
+            generateArray();
+            document.getElementById('speed').oninput = function() {
+                document.getElementById('speedValue').textContent = this.value;
+            };
+            window.onresize = resizeCanvas;
+        };
+
+        function resizeCanvas() {
+            const container = canvas.parentElement;
+            canvas.width = container.clientWidth - 30;
+            canvas.height = container.clientHeight - 30;
+            drawArray();
+        }
+
+        function generateArray() {
+            const size = parseInt(document.getElementById('arraySize').value);
+            array = [];
+            for (let i = 0; i < size; i++) array.push(Math.floor(Math.random() * 376) + 5);
+            originalArray = [...array];
+            resetStats();
+            drawArray();
+            document.getElementById('customStatus').textContent = '';
+        }
+
+        function loadCustomArray() {
+            const input = document.getElementById('customArray').value.trim();
+            const statusEl = document.getElementById('customStatus');
+            if (!input) { statusEl.textContent = '⚠️ Please enter numbers'; statusEl.className = 'status-message status-error'; return; }
+            try {
+                const numbers = input.replace(/,/g, ' ').split(/\s+/).map(n => parseInt(n));
+                if (numbers.some(isNaN)) { statusEl.textContent = '⚠️ Invalid input'; statusEl.className = 'status-message status-error'; return; }
+                if (numbers.some(n => n < 1 || n > 400)) { statusEl.textContent = '⚠️ Numbers must be 1-400'; statusEl.className = 'status-message status-error'; return; }
+                if (numbers.length < 2) { statusEl.textContent = '⚠️ At least 2 numbers'; statusEl.className = 'status-message status-error'; return; }
+                if (numbers.length > 1000) { statusEl.textContent = '⚠️ Max 1000 numbers'; statusEl.className = 'status-message status-error'; return; }
+                array = numbers;
+                originalArray = [...array];
+                resetStats();
+                drawArray();
+                statusEl.textContent = `✓ Loaded ${numbers.length} numbers`;
+                statusEl.className = 'status-message status-success';
+            } catch (e) { statusEl.textContent = '⚠️ Invalid input'; statusEl.className = 'status-message status-error'; }
+        }
+
+        function resetArray() { running = false; paused = false; array = [...originalArray]; resetStats(); drawArray(); document.getElementById('infoLabel').textContent = ''; }
+        function resetStats() { comparisons = swaps = writes = steps = 0; startTime = Date.now(); updateStats(); }
+        function updateStats() {
+            document.getElementById('comparisons').textContent = comparisons;
+            document.getElementById('swaps').textContent = swaps;
+            document.getElementById('writes').textContent = writes;
+            document.getElementById('steps').textContent = steps;
+            document.getElementById('time').textContent = ((Date.now() - startTime) / 1000).toFixed(2) + 's';
+        }
+
+        function drawArray(highlights = [], color = '#3b82f6') {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const barWidth = canvas.width / array.length;
+            const maxVal = Math.max(...array);
+            for (let i = 0; i < array.length; i++) {
+                const barHeight = (array[i] / maxVal) * (canvas.height - 30);
+                const x = i * barWidth, y = canvas.height - barHeight;
+                ctx.fillStyle = highlights.includes(i) ? color : '#4A90E2';
+                ctx.fillRect(x, y, barWidth - 2, barHeight);
+                if (array.length <= 60 && barWidth > 12) {
+                    ctx.fillStyle = barHeight > 25 ? '#000' : '#fff';
+                    ctx.font = `${Math.max(8, Math.min(barWidth / 2.5, 11))}px Arial`;
+                    ctx.textAlign = 'center';
+                    ctx.fillText(array[i], x + barWidth / 2, barHeight > 25 ? y - 5 : canvas.height - 5);
+                }
+            }
+        }
+
+        async function sleep(ms) { return new Promise(resolve => setTimeout(resolve, ms)); }
+
+        async function startSort() {
+            if (running) return;
+            running = true; paused = false; resetStats();
+            const algo = document.getElementById('algorithm').value;
+            document.getElementById('startBtn').disabled = true;
+            try {
+                switch(algo) {
+                    case 'bubble': await bubbleSort(); break;
+                    case 'selection': await selectionSort(); break;
+                    case 'insertion': await insertionSort(); break;
+                    case 'merge': await mergeSort(0, array.length - 1); break;
+                    case 'quick': await quickSort(0, array.length - 1); break;
+                }
+                if (running) { document.getElementById('infoLabel').textContent = 'Sorting Complete!'; drawArray(array.map((_, i) => i), '#10b981'); }
+            } catch (e) { console.error(e); }
+            running = false;
+            document.getElementById('startBtn').disabled = false;
+        }
+
+        function pauseSort() { running = false; paused = true; }
+
+        async function bubbleSort() {
+            const n = array.length;
+            for (let i = 0; i < n && running; i++) {
+                let swapped = false;
+                for (let j = 0; j < n - i - 1 && running; j++) {
+                    steps++; comparisons++;
+                    drawArray([j, j + 1], '#ef4444'); updateStats();
+                    await sleep(document.getElementById('speed').value);
+                    if (array[j] > array[j + 1]) {
+                        [array[j], array[j + 1]] = [array[j + 1], array[j]]; swaps++;
+                        drawArray([j, j + 1], '#10b981'); updateStats();
+                        await sleep(document.getElementById('speed').value);
+                        swapped = true;
+                    }
+                }
+                if (!swapped) break;
+            }
+        }
+
+        async function selectionSort() {
+            const n = array.length;
+            for (let i = 0; i < n && running; i++) {
+                let minIdx = i;
+                for (let j = i + 1; j < n && running; j++) {
+                    steps++; comparisons++;
+                    drawArray([minIdx, j], '#ef4444'); updateStats();
+                    await sleep(document.getElementById('speed').value);
+                    if (array[j] < array[minIdx]) minIdx = j;
+                }
+                if (minIdx !== i) {
+                    [array[i], array[minIdx]] = [array[minIdx], array[i]]; swaps++;
+                    drawArray([i, minIdx], '#10b981'); updateStats();
+                    await sleep(document.getElementById('speed').value);
+                }
+            }
+        }
+
+        async function insertionSort() {
+            for (let i = 1; i < array.length && running; i++) {
+                let key = array[i], j = i - 1;
+                while (j >= 0 && running) {
+                    steps++; comparisons++;
+                    drawArray([j, j + 1], '#ef4444'); updateStats();
+                    await sleep(document.getElementById('speed').value);
+                    if (array[j] > key) { array[j + 1] = array[j]; writes++; j--; } else break;
+                }
+                array[j + 1] = key; writes++;
+                drawArray([j + 1], '#10b981'); updateStats();
+                await sleep(document.getElementById('speed').value);
+            }
+        }
+
+        async function mergeSort(l, r) {
+            if (!running || l >= r) return;
+            const m = Math.floor((l + r) / 2);
+            await mergeSort(l, m); await mergeSort(m + 1, r); await merge(l, m, r);
+        }
+
+        async function merge(l, m, r) {
+            const left = array.slice(l, m + 1), right = array.slice(m + 1, r + 1);
+            let i = 0, j = 0, k = l;
+            while (i < left.length && j < right.length && running) {
+                steps++; comparisons++;
+                drawArray([k], '#ef4444'); updateStats();
+                await sleep(document.getElementById('speed').value);
+                array[k] = (left[i] <= right[j]) ? left[i++] : right[j++];
+                writes++;
+                drawArray([k], '#10b981'); updateStats(); k++;
+            }
+            while (i < left.length && running) { array[k++] = left[i++]; writes++; drawArray([k-1], '#10b981'); updateStats(); }
+            while (j < right.length && running) { array[k++] = right[j++]; writes++; drawArray([k-1], '#10b981'); updateStats(); }
+        }
+
+        async function quickSort(l, r) {
+            if (!running || l >= r) return;
+            const pi = await partition(l, r);
+            await quickSort(l, pi - 1); await quickSort(pi + 1, r);
+        }
+
+        async function partition(l, r) {
+            const pivot = array[r];
+            let i = l - 1;
+            for (let j = l; j < r && running; j++) {
+                steps++; comparisons++;
+                drawArray([j, r], '#ef4444'); updateStats();
+                await sleep(document.getElementById('speed').value);
+                if (array[j] < pivot) {
+                    i++;
+                    [array[i], array[j]] = [array[j], array[i]]; swaps++;
+                    drawArray([i, j], '#10b981'); updateStats();
+                    await sleep(document.getElementById('speed').value);
+                }
+            }
+            [array[i + 1], array[r]] = [array[r], array[i + 1]]; swaps++;
+            drawArray([i + 1, r], '#10b981'); updateStats();
+            await sleep(document.getElementById('speed').value);
+            return i + 1;
+        }
+    </script>
 </body>
 </html>
