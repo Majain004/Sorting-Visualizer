@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Interactive Sorting Algorithm Visualizer - Visualize Bubble Sort, Insertion Sort, Selection Sort, Merge Sort, and Quick Sort algorithms in real-time" />
+  <meta name="author" content="Your Name" />
+  <title>Sorting Algorithm Visualizer | Interactive Educational Tool</title>
+
+  <!-- PyScript CDN -->
+  <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
+  <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body { 
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      padding: 20px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+    }
+    
+    .wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 16px;
+      padding: 32px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+    
+    header {
+      text-align: center;
+      margin-bottom: 32px;
+      padding-bottom: 24px;
+      border-bottom: 3px solid #667eea;
+    }
+    
+    h1 {
+      color: #1e293b;
+      font-size: 2.5rem;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+    
+    .subtitle {
+      color: #64748b;
+      font-size: 1.1rem;
+    }
+    
+    .github-link {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 8px 16px;
+      background: #24292e;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 14px;
+      transition: background 0.3s;
+    }
+    
+    .github-link:hover {
+      background: #0366d6;
+    }
+    
+    #controls { 
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #f8fafc;
+      border-radius: 12px;
+      border: 2px solid #e2e8f0;
+    }
+    
+    #controls label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 500;
+      color: #334155;
+    }
+    
+    #container { 
+      width: 100%;
+      height: 400px;
+      border: 2px solid #cbd5e1;
+      border-radius: 12px;
+      display: flex;
+      align-items: flex-end;
+      gap: 2px;
+      padding: 12px;
+      background: #f1f5f9;
+      box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .bar { 
+      flex: 1;
+      margin: 0 1px;
+      background: #3b82f6;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      color: white;
+      font-size: 10px;
+      font-weight: 600;
+      border-radius: 4px 4px 0 0;
+      transition: background 0.2s;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    
+    button {
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+    
+    #start {
+      background: #10b981;
+      color: white;
+    }
+    
+    #start:hover:not(:disabled) {
+      background: #059669;
+      transform: translateY(-2px);
+    }
+    
+    #gen {
+      background: #3b82f6;
+      color: white;
+    }
+    
+    #gen:hover:not(:disabled) {
+      background: #2563eb;
+      transform: translateY(-2px);
+    }
+    
+    #shuffle {
+      background: #f59e0b;
+      color: white;
+    }
+    
+    #shuffle:hover:not(:disabled) {
+      background: #d97706;
+      transform: translateY(-2px);
+    }
+    
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    
+    input, select { 
+      padding: 8px 12px;
+      font-size: 14px;
+      border: 2px solid #cbd5e1;
+      border-radius: 6px;
+      transition: border 0.3s;
+    }
+    
+    input:focus, select:focus {
+      outline: none;
+      border-color: #3b82f6;
+    }
+    
+    footer {
+      text-align: center;
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 2px solid #e2e8f0;
+      color: #64748b;
+      font-size: 14px;
+    }
+    
+    .info-box {
+      margin-top: 24px;
+      padding: 16px;
+      background: #eff6ff;
+      border-left: 4px solid #3b82f6;
+      border-radius: 8px;
+    }
+    
+    .info-box h3 {
+      color: #1e40af;
+      margin-bottom: 8px;
+    }
+    
+    .info-box p {
+      color: #1e293b;
+      line-height: 1.6;
+    }
+    
+    @media (max-width: 768px) {
+      .wrapper {
+        padding: 20px;
+      }
+      
+      h1 {
+        font-size: 1.8rem;
+      }
+      
+      #controls {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      
+      #container {
+        height: 300px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <header>
+      <h1>🎯 Sorting Algorithm Visualizer</h1>
+      <p class="subtitle">Interactive visualization of sorting algorithms</p>
+      <a href="https://github.com/Majain004/Sorting-Visualizer" target="_blank" class="github-link">
+        📁 View on GitHub
+      </a>
+    </header>
+    
+    <div id="controls">
+      <label>📊 Array Size: <input id="size" type="number" min="5" max="120" value="30" /></label>
+      <label>⚡ Speed (ms): <input id="speed" type="number" min="5" max="1000" value="30" /></label>
+      <label>🔧 Algorithm:
+        <select id="algo">
+          <option value="bubble">Bubble Sort</option>
+          <option value="insertion">Insertion Sort</option>
+          <option value="selection">Selection Sort</option>
+        </select>
+      </label>
+      <button id="gen">🔄 Generate</button>
+      <button id="start">▶️ Start</button>
+      <button id="shuffle">🔀 Shuffle</button>
+    </div>
+
+    <div id="container"></div>
+    
+    <div class="info-box">
+      <h3>About This Project</h3>
+      <p>
+        This is an interactive sorting algorithm visualizer built with Python and PyScript. 
+        Watch how different sorting algorithms work in real-time with customizable array sizes and animation speeds.
+        Perfect for learning data structures and algorithms!
+      </p>
+    </div>
+    
+    <footer>
+      <p>Created for educational purposes | 
+         <a href="https://github.com/Majain004/Sorting-Visualizer" target="_blank" style="color: #3b82f6; text-decoration: none;">GitHub Repository</a>
+      </p>
+    </footer>
+  </div>
+
+  <py-script>
+import random
+import asyncio
+from js import document
+
+container = document.getElementById("container")
+size_input = document.getElementById("size")
+speed_input = document.getElementById("speed")
+algo_select = document.getElementById("algo")
+gen_btn = document.getElementById("gen")
+start_btn = document.getElementById("start")
+shuffle_btn = document.getElementById("shuffle")
+
+arr = []
+
+def render_array():
+    # clear container
+    while container.firstChild:
+        container.removeChild(container.firstChild)
+    max_val = max(arr) if arr else 1
+    for v in arr:
+        bar = document.createElement("div")
+        bar.className = "bar"
+        # set height relative to max
+        height_pct = int((v / max_val) * 100)
+        bar.style.height = f"{height_pct}%"
+        bar.style.background = "#3b82f6"
+        bar.innerText = str(v)
+        container.appendChild(bar)
+
+def gen_array(n):
+    global arr
+    arr = [random.randint(5, 100) for _ in range(n)]
+    render_array()
+
+async def highlight(i, j, color):
+    bars = container.getElementsByClassName("bar")
+    bars[i].style.background = color
+    bars[j].style.background = color
+
+async def swap(i, j):
+    # swap values in arr and update heights
+    arr[i], arr[j] = arr[j], arr[i]
+    bars = container.getElementsByClassName("bar")
+    # animate by swapping heights/text
+    h_i = bars[i].style.height
+    h_j = bars[j].style.height
+    t_i = bars[i].innerText
+    t_j = bars[j].innerText
+    bars[i].style.height = h_j
+    bars[j].style.height = h_i
+    bars[i].innerText = t_j
+    bars[j].innerText = t_i
+
+async def bubble_sort():
+    n = len(arr)
+    for x in range(n):
+        swapped = False
+        for y in range(0, n-x-1):
+            await highlight(y, y+1, "#ef4444")  # red compare
+            await asyncio.sleep(int(speed_input.value) / 1000)
+            if arr[y] > arr[y+1]:
+                await highlight(y, y+1, "#10b981")  # green swap
+                await asyncio.sleep(int(speed_input.value) / 1000)
+                await swap(y, y+1)
+                swapped = True
+            # revert color
+            bars = container.getElementsByClassName("bar")
+            bars[y].style.background = "#3b82f6"
+            bars[y+1].style.background = "#3b82f6"
+        if not swapped:
+            break
+
+async def insertion_sort():
+    for i in range(1, len(arr)):
+        key = arr[i]
+        j = i - 1
+        while j >= 0 and arr[j] > key:
+            await highlight(j, j+1, "#ef4444")
+            await asyncio.sleep(int(speed_input.value) / 1000)
+            arr[j+1] = arr[j]
+            # update visual
+            bars = container.getElementsByClassName("bar")
+            bars[j+1].style.height = bars[j].style.height
+            bars[j+1].innerText = bars[j].innerText
+            bars[j].style.background = "#3b82f6"
+            j -= 1
+        arr[j+1] = key
+        # set the final bar value visually
+        bars = container.getElementsByClassName("bar")
+        # find height by value relative to max
+        max_val = max(arr)
+        bars[j+1].style.height = f"{int((arr[j+1]/max_val)*100)}%"
+        bars[j+1].innerText = str(arr[j+1])
+        await asyncio.sleep(int(speed_input.value) / 1000)
+
+async def selection_sort():
+    n = len(arr)
+    for i in range(n):
+        min_idx = i
+        for j in range(i+1, n):
+            await highlight(min_idx, j, "#ef4444")
+            await asyncio.sleep(int(speed_input.value) / 1000)
+            if arr[j] < arr[min_idx]:
+                # revert previous min color
+                bars = container.getElementsByClassName("bar")
+                bars[min_idx].style.background = "#3b82f6"
+                min_idx = j
+                bars[min_idx].style.background = "#f59e0b"
+            else:
+                bars = container.getElementsByClassName("bar")
+                bars[j].style.background = "#3b82f6"
+        if min_idx != i:
+            await highlight(i, min_idx, "#10b981")
+            await asyncio.sleep(int(speed_input.value) / 1000)
+            await swap(i, min_idx)
+        # set sorted bar color
+        bars = container.getElementsByClassName("bar")
+        bars[i].style.background = "#6366f1"
+        await asyncio.sleep(int(speed_input.value) / 1000)
+
+# Event bindings
+def on_generate(ev=None):
+    try:
+        n = int(size_input.value)
+    except:
+        n = 30
+    gen_array(n)
+
+def on_shuffle(ev=None):
+    random.shuffle(arr)
+    render_array()
+
+async def on_start(ev=None):
+    start_btn.disabled = True
+    gen_btn.disabled = True
+    shuffle_btn.disabled = True
+    algo = algo_select.value
+    if algo == "bubble":
+        await bubble_sort()
+    elif algo == "insertion":
+        await insertion_sort()
+    elif algo == "selection":
+        await selection_sort()
+    # mark all sorted
+    bars = container.getElementsByClassName("bar")
+    for b in bars:
+        b.style.background = "#059669"
+    start_btn.disabled = False
+    gen_btn.disabled = False
+    shuffle_btn.disabled = False
+
+gen_btn.addEventListener("click", on_generate)
+shuffle_btn.addEventListener("click", on_shuffle)
+start_btn.addEventListener("click", lambda e: asyncio.ensure_future(on_start()))
+
+# initial
+gen_array(int(size_input.value))
+  </py-script>
+</body>
+</html>
